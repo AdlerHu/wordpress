@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+
+  db:
+    image: mysql:5.7
+    restart: always
+    networks:
+      - wordpress
+    environment:
+      MYSQL_ROOT_PASSWORD: MyR00tMySQLPa$$5w0rD
+      MYSQL_DATABASE: MyWordPressDatabaseName
+      MYSQL_USER: MyWordPressUser
+      MYSQL_PASSWORD: Pa$$5w0rD
+    volumes:
+      - mysql:/var/lib/mysql
+
+  wordpress:
+    depends_on:
+      - db
+    networks:
+      - wordpress
+    image: wordpress:php8.1
+    restart: always
+    ports:
+      - "8000:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: MyWordPressUser
+      WORDPRESS_DB_PASSWORD: Pa$$5w0rD
+      WORDPRESS_DB_NAME: MyWordPressDatabaseName
+    volumes:
+      - wordpress:/var/www/html
+
+networks:
+  wordpress:
+    name: wordpress
+
+volumes:
+  mysql:
+    external: true
+  wordpress:
+    external: true
