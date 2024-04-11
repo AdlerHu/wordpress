@@ -84,6 +84,10 @@ echo "$NEW_USER ALL=(ALL:ALL) NOPASSWD:ALL" | sudo tee -a /etc/sudoers.d/$NEW_US
 userdel ubuntu
 rm -rf /home/ubuntu
 
+docker volume create mysql
+docekr volume create wordpress
+
 usermod -aG docker adlerhu
-git clone https://github.com/example/repo.git /home/adlerhu/
+mkdir /home/adlerhu/wordpress/
+git clone https://github.com/AdlerHu/wordpress.git /home/adlerhu/wordpress/
 chown -R adlerhu:adlerhu /home/adlerhu/wordpress/'
