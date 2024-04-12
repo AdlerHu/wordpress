@@ -88,6 +88,8 @@ docker volume create mysql
 docekr volume create wordpress
 
 usermod -aG docker adlerhu
-mkdir /home/adlerhu/wordpress/
+mkdir -p /home/adlerhu/wordpress/secrets/
+touch /home/adlerhu/wordpress/secrets/mysql_password.txt
+touch /home/adlerhu/wordpress/secrets/mysql_root_password.txt
 git clone https://github.com/AdlerHu/wordpress.git /home/adlerhu/wordpress/
 chown -R adlerhu:adlerhu /home/adlerhu/wordpress/'
